@@ -18,64 +18,92 @@ class ProfileDataWidget extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Row(
+                crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  const Text('Имя:'),
+                  Expanded(
+                    flex: 0,
+                    child: const Text('Имя:'),
+                  ),
                   const SizedBox(width: 5),
                   Expanded(
                     child: Text(
                       profileModel?.profile?.firstName ?? '',
                       style: TextHelper.poppins14w700,
+                      overflow: TextOverflow.ellipsis,
+                      maxLines: 1,
                     ),
                   ),
                 ],
               ),
               Row(
                 children: [
-                  const Text('Фамилия:'),
+                  const Text(
+                    'Фамилия:',
+                    overflow: TextOverflow.ellipsis,
+                    maxLines: 1,
+                  ),
                   const SizedBox(width: 5),
                   Expanded(
                     child: Text(
                       profileModel?.profile?.lastName ?? '',
                       style: TextHelper.poppins14w700,
+                      overflow: TextOverflow.ellipsis,
+                      maxLines: 1,
                     ),
                   ),
                 ],
               ),
               Row(
                 children: [
-                  const Text('Должность:'),
+                  const Text(
+                    'Должность:',
+                    overflow: TextOverflow.ellipsis,
+                    maxLines: 1,
+                  ),
                   const SizedBox(width: 5),
                   Expanded(
                     child: Text(
                       profileModel?.profile?.positionAtWork ??
                           'Должность не указана',
                       style: TextHelper.poppins14w700,
+                      overflow: TextOverflow.ellipsis,
+                      maxLines: 1,
                     ),
                   ),
                 ],
               ),
               Row(
                 children: [
-                  const Text('Номер телефона:'),
+                  const Text(
+                    'Номер телефона:',
+                    overflow: TextOverflow.ellipsis,
+                    maxLines: 1,
+                  ),
                   const SizedBox(width: 5),
                   Expanded(
                     child: Text(
                       profileModel?.profile?.phoneNumber ?? 'номер не указан',
                       style: TextHelper.poppins14w700,
+                      overflow: TextOverflow.ellipsis,
+                      maxLines: 1,
                     ),
                   ),
                 ],
               ),
               Row(
                 children: [
-                  const Text('Почта:'),
+                  const Text(
+                    'Почта:',
+                    overflow: TextOverflow.ellipsis,
+                    maxLines: 1,
+                  ),
                   const SizedBox(width: 5),
                   Expanded(
                     child: Text(
                       profileModel?.email ?? '',
                       style: TextHelper.poppins14w700,
-                      overflow: TextOverflow.visible,
-                      maxLines: 2,
+                      overflow: TextOverflow.ellipsis,
+                      maxLines: 1,
                     ),
                   ),
                 ],
