@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:yntymak/feature/profile/presentation/screens/qr_code_scanner_screen.dart';
 
 import '../../feature/authorization/presentation/screens/login_screen.dart';
 import '../../feature/calendar/presentation/screen/calendar_screen.dart';
@@ -71,12 +72,12 @@ final GoRouter router = GoRouter(
             return const ProfileScreen();
           },
         ),
-        // GoRoute(
-        //   path: '/qr_scanner',
-        //   builder: (context, state) {
-        //     return const QRCodeScannerScreen();
-        //   },
-        // ),
+        GoRoute(
+          path: '/qr_scanner',
+          builder: (context, state) {
+            return const QRCodeScannerScreen();
+          },
+        ),
       ],
     ),
   ],
