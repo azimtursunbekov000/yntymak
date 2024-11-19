@@ -7,7 +7,6 @@ import '../../feature/events/data/models/events_model.dart';
 import '../../feature/events/presentation/screens/events_detail_screen.dart';
 import '../../feature/events/presentation/screens/events_screen.dart';
 import '../../feature/profile/presentation/screens/profile_screen.dart';
-import '../../feature/profile/presentation/screens/qr_code_scanner_screen.dart';
 import '../../feature/services/presentation/screens/services_screen.dart';
 import '../../feature/splash/splash_screen.dart';
 import '../commons/bottom_nav_bar.dart';
@@ -72,12 +71,12 @@ final GoRouter router = GoRouter(
             return const ProfileScreen();
           },
         ),
-        GoRoute(
-          path: '/qr_scanner',
-          builder: (context, state) {
-            return const QRCodeScannerScreen();
-          },
-        ),
+        // GoRoute(
+        //   path: '/qr_scanner',
+        //   builder: (context, state) {
+        //     return const QRCodeScannerScreen();
+        //   },
+        // ),
       ],
     ),
   ],
