@@ -28,6 +28,16 @@ class _ProfileScreenState extends State<ProfileScreen> {
     context.go('/');
   }
 
+  Future<void> deleteAccount() async {
+    final prefs = await SharedPreferences.getInstance();
+    await prefs.clear(); // Очищаем данные из SharedPreferences
+
+    // Здесь можно добавить вызов API для удаления аккаунта, если это необходимо.
+
+    context.read<ProfileCubit>().clearProfile(); // Очищаем данные профиля
+    context.go('/'); // Перенаправляем на экран авторизации или главную страницу
+  }
+
   @override
   Widget build(BuildContext context) {
     final profileState = context.watch<ProfileCubit>().state;
@@ -104,6 +114,42 @@ class _ProfileScreenState extends State<ProfileScreen> {
                           },
                         ),
                         const SizedBox(height: 30),
+                        // Кнопка "Удалить аккаунт", показывается только авторизованным
+                        if (isUserRegistered)
+                          CommonElevatedButton(
+                            title: 'Удалить аккаунт',
+                            onPressed: () async {
+                              // Подтверждение перед удалением
+                              bool shouldDelete = await showDialog(
+                                context: context,
+                                builder: (context) {
+                                  return AlertDialog(
+                                    title: const Text('Удалить аккаунт?'),
+                                    content: const Text(
+                                        'После удаления ваш аккаунт будет полностью удален. Вы уверены?'),
+                                    actions: [
+                                      TextButton(
+                                        onPressed: () {
+                                          Navigator.pop(context, false);
+                                        },
+                                        child: const Text('Отмена'),
+                                      ),
+                                      TextButton(
+                                        onPressed: () {
+                                          Navigator.pop(context, true);
+                                        },
+                                        child: const Text('Удалить'),
+                                      ),
+                                    ],
+                                  );
+                                },
+                              );
+
+                              if (shouldDelete) {
+                                await deleteAccount();
+                              }
+                            },
+                          ),
                       ],
                     ),
                   ),
