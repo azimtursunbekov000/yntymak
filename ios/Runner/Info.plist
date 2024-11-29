@@ -15,9 +15,9 @@
 	<key>CFBundleName</key>
 	<string>yntymak</string>
 	<key>CFBundlePackageType</key>
-	<key>ITSAppUsesNonExemptEncryption</key>
-    <true/>
 	<string>APPL</string>
+	<key>ITSAppUsesNonExemptEncryption</key>
+	<false/>
 	<key>CFBundleShortVersionString</key>
 	<string>$(FLUTTER_BUILD_NAME)</string>
 	<key>CFBundleSignature</key>
