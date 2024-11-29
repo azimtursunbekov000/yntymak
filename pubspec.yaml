@@ -3,7 +3,7 @@ description: "yntymak.kg"
 
 publish_to: 'none' # Remove this line if you wish to publish to pub.dev
 
-version: 1.0.0+45
+version: 1.0.0+48
 
 environment:
   sdk: ^3.5.1
