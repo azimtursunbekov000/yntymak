@@ -126,9 +126,9 @@ class _LoginScreenState extends State<LoginScreen> {
                     if (state is AuthErrorState) {
                       // Обработка ошибок
                     } else if (state is RegistrationLoadedState) {
-                      // Переключаем на экран с BottomNavBar после успешной регистрации
-                      context.replace(
-                          '/'); // Заменяем текущий экран на главный экран (BottomNavBar)
+                      setState(() {
+                        isRegistrationFields = !isRegistrationFields;
+                      }); // Заменяем текущий экран на главный экран (BottomNavBar)
                     } else if (state is LoginLoadedState) {
                       await _saveLoginInfo(state.loginModel);
                       context.read<ProfileCubit>().setProfile(state.loginModel);
@@ -311,12 +311,6 @@ class _LoginScreenState extends State<LoginScreen> {
                               controller: positionAtWorkController,
                               showError: showError &&
                                   (positionAtWorkController.text.isEmpty),
-                              validator: (value) {
-                                if (value == null || value.isEmpty) {
-                                  return 'Место работы';
-                                }
-                                return null;
-                              },
                             ),
                             const SizedBox(height: 10),
                             CommonTextFieldWidget(
@@ -324,12 +318,6 @@ class _LoginScreenState extends State<LoginScreen> {
                               controller: workAddressController,
                               showError: showError &&
                                   (workAddressController.text.isEmpty),
-                              validator: (value) {
-                                if (value == null || value.isEmpty) {
-                                  return 'Введите Рабочий адрес';
-                                }
-                                return null;
-                              },
                             ),
                             const SizedBox(height: 10),
                             CommonTextFieldWidget(
@@ -337,12 +325,6 @@ class _LoginScreenState extends State<LoginScreen> {
                               controller: workNameController,
                               showError: showError &&
                                   (workNameController.text.isEmpty),
-                              validator: (value) {
-                                if (value == null || value.isEmpty) {
-                                  return 'Введите Название работы';
-                                }
-                                return null;
-                              },
                             ),
                             const SizedBox(height: 10),
                           ],
