@@ -8,8 +8,12 @@ class TextFieldPasswordWidget extends StatefulWidget {
   final TextEditingController? controller;
   final ValueChanged<String>? onChanged;
 
-  const TextFieldPasswordWidget(
-      {super.key, required this.labelText, this.onChanged, this.controller});
+  const TextFieldPasswordWidget({
+    super.key,
+    required this.labelText,
+    this.onChanged,
+    this.controller,
+  });
 
   @override
   State<TextFieldPasswordWidget> createState() =>

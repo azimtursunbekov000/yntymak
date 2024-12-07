@@ -124,18 +124,21 @@ class _LoginScreenState extends State<LoginScreen> {
                   bloc: context.read<AuthBloc>(),
                   listener: (context, state) async {
                     if (state is AuthErrorState) {
+                      // Обработка ошибок
                     } else if (state is RegistrationLoadedState) {
-                      setState(() {
-                        isRegistrationFields = !isRegistrationFields;
-                      });
+                      // Переключаем на экран с BottomNavBar после успешной регистрации
+                      context.replace(
+                          '/'); // Заменяем текущий экран на главный экран (BottomNavBar)
                     } else if (state is LoginLoadedState) {
                       await _saveLoginInfo(state.loginModel);
                       context.read<ProfileCubit>().setProfile(state.loginModel);
-                      context.replace('/');
+                      context.replace(
+                          '/'); // Перенаправляем на главный экран с BottomNavBar
                     } else if (state is RegistrationErrorState) {
+                      // Обработка ошибок регистрации
                       try {
                         final Map<String, dynamic> errorMessage = json.decode(
-                            state.error.message ?? 'что то пошло не так');
+                            state.error.message ?? 'что-то пошло не так');
 
                         if (errorMessage.containsKey('email')) {
                           ScaffoldMessenger.of(context).showSnackBar(
@@ -263,10 +266,30 @@ class _LoginScreenState extends State<LoginScreen> {
                                   child: CommonTextFieldWidget(
                                     isBorder: true,
                                     labelText: 'Регион',
+                                    controller: regionController,
+                                    showError: showError &&
+                                        (regionController.text.isEmpty),
+                                    suffixIcon: DropDownMenuWidget(
+                                      onChanged: (String? value) {
+                                        setState(() {
+                                          selectedRegionIndex =
+                                              regionIds[value ?? ''] ?? -1;
+                                          regionController.text = value ?? '';
+                                        });
+                                      },
+                                      options: regionIds.keys.toList(),
+                                    ),
+                                  ),
+                                ),
+                                const SizedBox(width: 15),
+                                Expanded(
+                                  child: CommonTextFieldWidget(
+                                    isBorder: true,
+                                    labelText: 'Район',
                                     controller: cityOrDistrictController,
                                     showError: showError &&
                                         (cityOrDistrictController.text.isEmpty),
-                                    suffixIcon: DropDownButtonWidget(
+                                    suffixIcon: DropDownMenuWidget(
                                       onChanged: (String? value) {
                                         setState(() {
                                           selectedAreaIndex =
@@ -280,26 +303,6 @@ class _LoginScreenState extends State<LoginScreen> {
                                     ),
                                   ),
                                 ),
-                                const SizedBox(width: 15),
-                                Expanded(
-                                  child: CommonTextFieldWidget(
-                                    isBorder: true,
-                                    labelText: 'Район',
-                                    controller: regionController,
-                                    showError: showError &&
-                                        (regionController.text.isEmpty),
-                                    suffixIcon: DropDownButtonWidget(
-                                      onChanged: (String? value) {
-                                        setState(() {
-                                          selectedRegionIndex =
-                                              regionIds[value ?? ''] ?? -1;
-                                          regionController.text = value ?? '';
-                                        });
-                                      },
-                                      options: regionIds.keys.toList(),
-                                    ),
-                                  ),
-                                ),
                               ],
                             ),
                             const SizedBox(height: 10),
@@ -308,6 +311,12 @@ class _LoginScreenState extends State<LoginScreen> {
                               controller: positionAtWorkController,
                               showError: showError &&
                                   (positionAtWorkController.text.isEmpty),
+                              validator: (value) {
+                                if (value == null || value.isEmpty) {
+                                  return 'Место работы';
+                                }
+                                return null;
+                              },
                             ),
                             const SizedBox(height: 10),
                             CommonTextFieldWidget(
@@ -315,6 +324,12 @@ class _LoginScreenState extends State<LoginScreen> {
                               controller: workAddressController,
                               showError: showError &&
                                   (workAddressController.text.isEmpty),
+                              validator: (value) {
+                                if (value == null || value.isEmpty) {
+                                  return 'Введите Рабочий адрес';
+                                }
+                                return null;
+                              },
                             ),
                             const SizedBox(height: 10),
                             CommonTextFieldWidget(
@@ -322,6 +337,12 @@ class _LoginScreenState extends State<LoginScreen> {
                               controller: workNameController,
                               showError: showError &&
                                   (workNameController.text.isEmpty),
+                              validator: (value) {
+                                if (value == null || value.isEmpty) {
+                                  return 'Введите Название работы';
+                                }
+                                return null;
+                              },
                             ),
                             const SizedBox(height: 10),
                           ],
