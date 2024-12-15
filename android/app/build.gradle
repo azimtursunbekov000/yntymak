@@ -14,7 +14,7 @@ if (keystorePropertiesFile.exists()) {
 
 android {
     namespace = "yntymak.kg.yntymak"
-    compileSdk = flutter.compileSdkVersion
+    compileSdk 29
     ndkVersion = flutter.ndkVersion
 
     compileOptions {

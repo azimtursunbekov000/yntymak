@@ -20,9 +20,9 @@ class ProfileDataWidget extends StatelessWidget {
               Row(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Expanded(
+                  const Expanded(
                     flex: 0,
-                    child: const Text('Имя:'),
+                    child: Text('Имя:'),
                   ),
                   const SizedBox(width: 5),
                   Expanded(

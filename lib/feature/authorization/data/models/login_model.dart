@@ -43,7 +43,7 @@ class LoginModel {
   }) {
     return LoginModel(
       id: id ?? this.id,
-      username: userName ?? this.username,
+      username: userName ?? username,
       email: email ?? this.email,
       password: password ?? this.password,
       tokens: tokens ?? this.tokens,
